@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import MainHeaderBackground from './main-header-background';
+import {MainHeaderBackground} from './MainHeaderBackground';
 import logoImg from '@/assets/logo.png';
-import classes from './main-header.module.scss';
-import NavLink from './nav-link';
+import classes from './MainHeader.module.scss';
+import {NavLink} from './NavLink';
 
 export const MainHeader() {
   return (

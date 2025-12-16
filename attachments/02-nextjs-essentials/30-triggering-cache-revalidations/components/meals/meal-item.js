@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import classes from './meal-item.module.scss';
+import classes from './MealItem.module.scss';
 
 export const MealItem({ title, slug, image, summary, creator }) {
   return (

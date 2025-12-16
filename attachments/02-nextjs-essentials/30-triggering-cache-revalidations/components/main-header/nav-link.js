@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import classes from './nav-link.module.scss';
+import classes from './NavLink.module.scss';
 
 export const NavLink({ href, children }) {
   const path = usePathname();

@@ -12,4 +12,4 @@ export const MealsGrid = ({ meals }: { meals: MealItemProps[] }) => {
       ))}
     </ul>
   );
-};
+}

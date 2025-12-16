@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import NavLink from './nav-link';
+import {NavLink} from './NavLink';
 
 export const MainHeader() {
   return (

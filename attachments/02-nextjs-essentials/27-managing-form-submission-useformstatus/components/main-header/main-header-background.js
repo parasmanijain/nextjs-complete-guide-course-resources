@@ -1,4 +1,4 @@
-import classes from './main-header-background.module.scss';
+import classes from './MainHeaderBackground.module.scss';
 
 export const MainHeaderBackground() {
   return (

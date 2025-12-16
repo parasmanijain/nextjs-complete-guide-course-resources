@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { MainHeaderBackground } from './MainHeaderBackground';
 import { NavLink } from './NavLink';
 import logoImg from '@/assets/logo.png';
-import classes from './main-header.module.scss';
+import classes from './MainHeader.module.scss';
 
 export const MainHeader = () => {
   return (

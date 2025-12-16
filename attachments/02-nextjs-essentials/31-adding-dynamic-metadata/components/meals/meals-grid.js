@@ -1,5 +1,5 @@
 import MealItem from './meal-item';
-import classes from './meals-grid.module.scss';
+import classes from './MealsGrid.module.scss';
 
 export const MealsGrid({ meals }) {
   return (
