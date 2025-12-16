@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import NavLink from './nav-link';
 
-export default function MainHeader() {
+export const MainHeader() {
   return (
     <header id="main-header">
       <div id="logo">

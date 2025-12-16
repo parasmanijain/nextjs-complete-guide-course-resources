@@ -4,7 +4,7 @@ import { useFormState } from 'react-dom';
 
 import FormSubmit from '@/components/form-submit';
 
-export default function PostForm({ action }) {
+export const PostForm({ action }) {
   const [state, formAction] = useFormState(action, {});
 
   return (

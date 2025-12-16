@@ -28,7 +28,7 @@ function Post({ post }) {
   );
 }
 
-export default function Posts({ posts }) {
+export const Posts({ posts }) {
   if (!posts || posts.length === 0) {
     return <p>There are no posts yet. Maybe start sharing some?</p>;
   }

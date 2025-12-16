@@ -1,7 +1,7 @@
 import logo from '@/assets/logo.png';
 import Link from 'next/link';
 
-export default function Header() {
+export const Header() {
   return (
     <header id="main-header">
       <Link href="/">

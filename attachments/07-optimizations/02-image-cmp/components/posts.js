@@ -46,7 +46,7 @@ function Post({ post, action }) {
   );
 }
 
-export default function Posts({ posts }) {
+export const Posts({ posts }) {
   const [optimisticPosts, updateOptimisticPosts] = useOptimistic(
     posts,
     (prevPosts, updatedPostId) => {

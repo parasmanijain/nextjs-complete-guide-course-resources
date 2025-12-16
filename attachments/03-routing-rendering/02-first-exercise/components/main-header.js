@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function MainHeader() {
+export const MainHeader() {
   return (
     <header>
       <ul>

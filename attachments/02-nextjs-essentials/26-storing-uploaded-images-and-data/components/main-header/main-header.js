@@ -6,7 +6,7 @@ import logoImg from '@/assets/logo.png';
 import classes from './main-header.module.scss';
 import NavLink from './nav-link';
 
-export default function MainHeader() {
+export const MainHeader() {
   return (
     <>
       <MainHeaderBackground />

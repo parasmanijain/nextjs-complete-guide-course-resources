@@ -1,7 +1,7 @@
 import MealItem from './meal-item';
 import classes from './meals-grid.module.scss';
 
-export default function MealsGrid({ meals }) {
+export const MealsGrid({ meals }) {
   return (
     <ul className={classes.meals}>
       {meals.map((meal) => (

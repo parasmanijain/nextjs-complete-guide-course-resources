@@ -4,7 +4,7 @@ import { useFormState } from 'react-dom';
 
 import { signup } from '@/actions/auth-actions';
 
-export default function AuthForm({ mode }) {
+export const AuthForm({ mode }) {
   const [formState, formAction] = useFormState(signup, {});
   return (
     <form id="auth-form" action={formAction}>

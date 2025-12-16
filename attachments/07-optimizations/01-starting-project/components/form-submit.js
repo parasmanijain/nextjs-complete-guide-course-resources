@@ -2,7 +2,7 @@
 
 import { useFormStatus } from 'react-dom';
 
-export default function FormSubmit() {
+export const FormSubmit() {
   const status = useFormStatus();
 
   if (status.pending) {
