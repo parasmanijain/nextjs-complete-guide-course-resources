@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 
-import classes from './image-picker.module.css';
+import classes from './image-picker.module.scss';
 
 export default function ImagePicker({ label, name }) {
   const [pickedImage, setPickedImage] = useState();

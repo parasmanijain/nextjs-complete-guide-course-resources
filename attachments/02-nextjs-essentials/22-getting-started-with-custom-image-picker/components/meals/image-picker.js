@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 
-import classes from './image-picker.module.css';
+import classes from './image-picker.module.scss';
 
 export default function ImagePicker({ label, name }) {
   const imageInput = useRef();

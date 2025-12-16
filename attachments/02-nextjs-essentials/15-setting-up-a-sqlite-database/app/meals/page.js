@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import classes from './page.module.css';
+import classes from './page.module.scss';
 import MealsGrid from '@/components/meals/meals-grid';
 
 export default function MealsPage() {

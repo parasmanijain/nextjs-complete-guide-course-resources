@@ -1,5 +1,5 @@
 import ImagePicker from '@/components/meals/image-picker';
-import classes from './page.module.css';
+import classes from './page.module.scss';
 
 export default function ShareMealPage() {
   async function shareMeal(formData) {

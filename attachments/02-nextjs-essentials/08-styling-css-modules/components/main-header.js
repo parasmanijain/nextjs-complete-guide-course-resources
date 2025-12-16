@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import logoImg from '@/assets/logo.png';
-import classes from './main-header.module.css';
+import classes from './main-header.module.scss';
 
 export default function MainHeader() {
   return (

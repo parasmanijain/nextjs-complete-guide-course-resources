@@ -1,5 +1,5 @@
 import { logout } from '@/actions/auth-actions';
-import '../globals.css';
+import '../globals.scss';
 
 export const metadata = {
   title: 'Next Auth',
