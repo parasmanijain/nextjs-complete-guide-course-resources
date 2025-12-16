@@ -1,4 +1,4 @@
-const sql = require('better-sqlite3');
+import sql from 'better-sqlite3';
 const db = sql('meals.db');
 
 const dummyMeals = [
@@ -164,7 +164,8 @@ const dummyMeals = [
   },
 ];
 
-db.prepare(`
+db.prepare(
+  `
    CREATE TABLE IF NOT EXISTS meals (
        id INTEGER PRIMARY KEY AUTOINCREMENT,
        slug TEXT NOT NULL UNIQUE,
@@ -175,7 +176,8 @@ db.prepare(`
        creator TEXT NOT NULL,
        creator_email TEXT NOT NULL
     )
-`).run();
+`
+).run();
 
 async function initData() {
   const stmt = db.prepare(`
