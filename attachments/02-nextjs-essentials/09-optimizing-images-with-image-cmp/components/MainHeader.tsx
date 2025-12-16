@@ -1,27 +1,26 @@
 import Link from 'next/link';
 import Image from 'next/image';
-
 import logoImg from '@/assets/logo.png';
-import classes from './main-header.module.scss';
+import classes from './MainHeader.module.scss';
 
-export default function MainHeader() {
+export const MainHeader = () => {
   return (
     <header className={classes.header}>
-      <Link className={classes.logo} href="/">
-        <Image src={logoImg} alt="A plate with food on it" priority />
+      <Link className={classes.logo} href='/'>
+        <Image src={logoImg} alt='A plate with food on it' priority />
         NextLevel Food
       </Link>
 
       <nav className={classes.nav}>
         <ul>
           <li>
-            <Link href="/meals">Browse Meals</Link>
+            <Link href='/meals'>Browse Meals</Link>
           </li>
           <li>
-            <Link href="/community">Foodies Community</Link>
+            <Link href='/community'>Foodies Community</Link>
           </li>
         </ul>
       </nav>
     </header>
   );
-}
+};
