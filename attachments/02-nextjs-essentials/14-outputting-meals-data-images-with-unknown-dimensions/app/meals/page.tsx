@@ -1,7 +1,6 @@
 import Link from 'next/link';
-
 import classes from './page.module.scss';
-import MealsGrid from '@/components/meals/meals-grid';
+import { MealsGrid } from '@/components/meals/MealsGrid';
 
 export default function MealsPage() {
   return (
@@ -15,9 +14,7 @@ export default function MealsPage() {
           Choose your favorite recipe and cook it yourself. It is easy and fun!
         </p>
         <p className={classes.cta}>
-          <Link href="/meals/share">
-            Share Your Favorite Recipe
-          </Link>
+          <Link href='/meals/share'>Share Your Favorite Recipe</Link>
         </p>
       </header>
       <main className={classes.main}>
