@@ -1,11 +1,11 @@
 import Link from 'next/link';
-
 import classes from './page.module.scss';
-import MealsGrid from '@/components/meals/meals-grid';
+import { MealItemProps } from 'models';
+import { MealsGrid } from '@/components/meals/MealsGrid';
 import { getMeals } from '@/lib/meals';
 
 export default async function MealsPage() {
-  const meals = await getMeals();
+  const meals = await getMeals() as MealItemProps[];
 
   return (
     <>
@@ -18,9 +18,7 @@ export default async function MealsPage() {
           Choose your favorite recipe and cook it yourself. It is easy and fun!
         </p>
         <p className={classes.cta}>
-          <Link href="/meals/share">
-            Share Your Favorite Recipe
-          </Link>
+          <Link href='/meals/share'>Share Your Favorite Recipe</Link>
         </p>
       </header>
       <main className={classes.main}>
