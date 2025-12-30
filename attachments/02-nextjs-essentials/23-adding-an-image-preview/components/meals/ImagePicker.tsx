@@ -2,10 +2,9 @@
 
 import { useRef, useState } from 'react';
 import Image from 'next/image';
+import classes from './ImagePicker.module.scss';
 
-import classes from './image-picker.module.scss';
-
-export const ImagePicker({ label, name }) {
+export const ImagePicker = ({ label, name }) => {
   const [pickedImage, setPickedImage] = useState();
   const imageInput = useRef();
 

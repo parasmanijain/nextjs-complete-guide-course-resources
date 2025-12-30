@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import classes from './MealItem.module.scss';
 
-export const MealItem({ title, slug, image, summary, creator }) {
+export const MealItem = ({ title, slug, image, summary, creator }) => {
   return (
     <article className={classes.meal}>
       <header>
