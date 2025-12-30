@@ -5,7 +5,7 @@ export const metadata = {
   description: 'Next.js Authentication',
 };
 
-export default function AuthRootLayout({ children }) {
+export default function AuthRootLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <header id="auth-header">

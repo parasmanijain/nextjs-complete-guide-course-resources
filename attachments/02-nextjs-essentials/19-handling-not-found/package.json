@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "init": "rm meals.db && node initdb.ts",
+    "init:db": "[ -f meals.db ] && rm meals.db; node initdb.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

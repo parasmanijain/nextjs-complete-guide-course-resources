@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import classes from './image-picker.module.scss';
+import classes from './ImagePicker.module.scss';
 
 export const ImagePicker = ({ label, name }) => {
   const imageInput = useRef(null);

@@ -6,7 +6,7 @@ export const metadata = {
   description: 'Browse and share amazing posts.',
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>

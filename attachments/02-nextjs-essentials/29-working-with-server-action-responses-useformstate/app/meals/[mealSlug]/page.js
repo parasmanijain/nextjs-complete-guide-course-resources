@@ -4,8 +4,8 @@ import { notFound } from 'next/navigation';
 import { getMeal } from '@/lib/meals';
 import classes from './page.module.scss';
 
-export default function MealDetailsPage({ params }) {
-  const meal = getMeal(params.mealSlug);
+export default function MealDetailsPage({ params}: { params: { mealSlug: string };}) {
+  const meal = getMeal(params.mealSlug) as MealItemProps;;
 
   if (!meal) {
     notFound();
