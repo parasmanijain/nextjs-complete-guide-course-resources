@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-
 import burgerImg from '@/assets/burger.jpg';
 import curryImg from '@/assets/curry.jpg';
 import dumplingsImg from '@/assets/dumplings.jpg';
@@ -22,7 +21,7 @@ const images = [
   { image: tomatoSaladImg, alt: 'A delicious tomato salad' },
 ];
 
-export const ImageSlideshow() {
+export const ImageSlideshow = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {

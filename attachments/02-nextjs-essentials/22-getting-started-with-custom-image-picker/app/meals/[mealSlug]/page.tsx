@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-
 import { getMeal } from '@/lib/meals';
 import classes from './page.module.scss';
 
