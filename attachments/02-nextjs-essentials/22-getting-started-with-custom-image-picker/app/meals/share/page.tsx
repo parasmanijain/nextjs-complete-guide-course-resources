@@ -1,4 +1,4 @@
-import ImagePicker from '@/components/meals/ImagePicker';
+import { ImagePicker } from '@/components/meals/ImagePicker';
 import classes from './page.module.scss';
 
 export default function ShareMealPage() {
@@ -35,7 +35,7 @@ export default function ShareMealPage() {
             <textarea
               id="instructions"
               name="instructions"
-              rows="10"
+              rows={10}
               required
             ></textarea>
           </p>
