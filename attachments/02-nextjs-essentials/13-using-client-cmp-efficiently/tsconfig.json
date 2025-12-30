@@ -33,9 +33,11 @@
       ],
       "@/app/*": [
         "app/*"
+      ],
+      "@/assets/*": [
+        "assets/*"
       ]
-    },
-    
+    }
   },
   "include": [
     "next-env.d.ts",
