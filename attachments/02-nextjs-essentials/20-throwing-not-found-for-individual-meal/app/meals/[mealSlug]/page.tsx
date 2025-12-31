@@ -4,13 +4,13 @@ import { MealItemProps } from 'models';
 import { getMeal } from '@/lib/meals';
 import classes from './page.module.scss';
 
-export default function MealDetailsPage({
+export default async function MealDetailsPage({
   params,
 }: {
-  params: { mealSlug: string };
+  params: Promise<{ mealSlug: string }>;
 }) {
-  const meal = getMeal(params.mealSlug) as MealItemProps;
-
+  const { mealSlug } = await params;
+  const meal = getMeal(mealSlug) as MealItemProps;
   if (!meal) {
     notFound();
   }
