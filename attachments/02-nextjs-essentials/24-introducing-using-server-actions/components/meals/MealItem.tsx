@@ -1,9 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
-
+import { MealItemProps } from '@/models';
 import classes from './MealItem.module.scss';
 
-export const MealItem({ title, slug, image, summary, creator }) {
+export const MealItem = ({
+  title,
+  slug,
+  image,
+  summary,
+  creator,
+}: MealItemProps) => {
   return (
     <article className={classes.meal}>
       <header>

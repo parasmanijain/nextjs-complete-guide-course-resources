@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import {NavLink} from './NavLink';
+import { NavLink } from './NavLink';
 
-export const MainHeader() {
+export const MainHeader = () => {
   return (
     <header id="main-header">
       <div id="logo">

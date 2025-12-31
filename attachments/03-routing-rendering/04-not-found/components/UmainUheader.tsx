@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const MainHeader() {
+export const MainHeader = () => {
   return (
     <header id="main-header">
       <div id="logo">

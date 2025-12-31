@@ -1,7 +1,7 @@
 import { MealItem } from './MealItem';
 import classes from './MealsGrid.module.scss';
 
-export const MealsGrid({ meals }) {
+export const MealsGrid = ({ meals }: { meals: MealItemProps[] }) => {
   return (
     <ul className={classes.meals}>
       {meals.map((meal) => (

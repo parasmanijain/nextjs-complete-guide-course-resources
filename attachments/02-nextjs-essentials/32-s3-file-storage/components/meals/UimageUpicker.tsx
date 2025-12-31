@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import classes from './ImagePicker.module.scss';
 
-export const ImagePicker({ label, name }) {
+export const ImagePicker = ({ label = '', name = '' }: ImagePickerProps) => {
   const [pickedImage, setPickedImage] = useState();
   const imageInput = useRef();
 
