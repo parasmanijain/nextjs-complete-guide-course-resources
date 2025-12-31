@@ -1,4 +1,4 @@
-import ImagePicker from '@/components/meals/image-picker';
+import { ImagePicker } from '@/components/meals/ImagePicker';
 import classes from './page.module.scss';
 import { shareMeal } from '@/lib/actions';
 

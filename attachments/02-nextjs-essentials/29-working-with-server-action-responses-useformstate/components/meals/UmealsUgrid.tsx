@@ -1,4 +1,4 @@
-import MealItem from './meal-item';
+import { MealItem } from './MealItem';
 import classes from './MealsGrid.module.scss';
 
 export const MealsGrid({ meals }) {
