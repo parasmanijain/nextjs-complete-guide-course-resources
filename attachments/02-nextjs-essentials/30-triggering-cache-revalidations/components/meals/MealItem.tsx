@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-
+import { MealItemProps } from '@/models';
 import classes from './MealItem.module.scss';
 
 export const MealItem = ({
