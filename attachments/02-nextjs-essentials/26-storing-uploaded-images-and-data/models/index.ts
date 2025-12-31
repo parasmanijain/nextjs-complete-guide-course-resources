@@ -15,3 +15,18 @@ export interface NavLinkProps {
   href: string;
   children: ReactNode;
 }
+
+export interface MealInput {
+  title: string;
+  summary: string;
+  instructions: string;
+  image: File;
+  creator: string;
+  creator_email: string;
+  slug?: string;
+}
+
+export interface MealDB extends Omit<MealInput, 'image'> {
+  image: string; // stored path
+  slug: string;
+}
