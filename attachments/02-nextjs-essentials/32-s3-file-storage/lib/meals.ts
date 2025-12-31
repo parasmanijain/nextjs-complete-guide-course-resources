@@ -1,16 +1,11 @@
-// import fs from 'node:fs';
 import { S3 } from '@aws-sdk/client-s3';
-
 import sql from 'better-sqlite3';
 import slugify from 'slugify';
 import xss from 'xss';
+import { MealDB, MealInput } from '@/models';
 
 const s3 = new S3({
   region: 'us-east-1',
-  // credentials: {
-  //   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  // },
 });
 const db = sql('meals.db');
 
@@ -21,16 +16,16 @@ export async function getMeals() {
   return db.prepare('SELECT * FROM meals').all();
 }
 
-export function getMeal(slug) {
+export function getMeal(slug: string) {
   return db.prepare('SELECT * FROM meals WHERE slug = ?').get(slug);
 }
 
-export async function saveMeal(meal) {
-  meal.slug = slugify(meal.title, { lower: true });
-  meal.instructions = xss(meal.instructions);
+export async function saveMeal(meal: MealInput) {
+  const slug = slugify(meal.title, { lower: true });
+  const instructions = xss(meal.instructions);
 
   const extension = meal.image.name.split('.').pop();
-  const fileName = `${meal.slug}.${extension}`;
+  const fileName = `${slug}.${extension}`;
 
   const bufferedImage = await meal.image.arrayBuffer();
 
@@ -41,8 +36,15 @@ export async function saveMeal(meal) {
     ContentType: meal.image.type,
   });
 
-
-  meal.image = fileName;
+  const mealForDB: MealDB = {
+    title: meal.title,
+    summary: meal.summary,
+    instructions,
+    creator: meal.creator,
+    creator_email: meal.creator_email,
+    image: fileName,
+    slug,
+  };
 
   db.prepare(
     `
@@ -58,5 +60,5 @@ export async function saveMeal(meal) {
       @slug
     )
   `
-  ).run(meal);
+  ).run(mealForDB);
 }

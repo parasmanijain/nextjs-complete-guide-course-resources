@@ -1,11 +1,16 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-
 import { getMeal } from '@/lib/meals';
+import { MealItemProps } from '@/models';
 import classes from './page.module.scss';
 
-export async function generateMetadata({ params }) {
-  const meal = getMeal(params.mealSlug) as MealItemProps;;
+export async function generateMetadata({
+  params,
+}: {
+  params: { mealSlug: string };
+}): Promise<Metadata> {
+  const meal = getMeal(params.mealSlug) as MealItemProps;
 
   if (!meal) {
     notFound();
@@ -17,8 +22,12 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function MealDetailsPage({ params}: { params: { mealSlug: string };}) {
-  const meal = getMeal(params.mealSlug) as MealItemProps;;
+export default function MealDetailsPage({
+  params,
+}: {
+  params: { mealSlug: string };
+}) {
+  const meal = getMeal(params.mealSlug) as MealItemProps;
 
   if (!meal) {
     notFound();

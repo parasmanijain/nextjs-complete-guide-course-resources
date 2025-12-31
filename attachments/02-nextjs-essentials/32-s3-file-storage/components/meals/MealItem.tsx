@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-
 import classes from './MealItem.module.scss';
+import { MealItemProps } from '@/models';
 
 export const MealItem = ({
   title,

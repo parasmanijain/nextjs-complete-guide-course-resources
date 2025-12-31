@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { NavLinkProps } from '@/models';
 import classes from './NavLink.module.scss';
 
 export const NavLink = ({ href, children }: NavLinkProps) => {
