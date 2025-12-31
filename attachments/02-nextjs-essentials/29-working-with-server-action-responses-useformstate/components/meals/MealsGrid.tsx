@@ -1,3 +1,4 @@
+import { MealItemProps } from '@/models';
 import { MealItem } from './MealItem';
 import classes from './MealsGrid.module.scss';
 

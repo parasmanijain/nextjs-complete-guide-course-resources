@@ -1,7 +1,6 @@
 'use client';
 
 import { useFormState } from 'react-dom';
-
 import { ImagePicker } from '@/components/meals/ImagePicker';
 import classes from './page.module.scss';
 import { shareMeal } from '@/lib/actions';

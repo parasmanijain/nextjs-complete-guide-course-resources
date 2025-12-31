@@ -1,6 +1,5 @@
 import Link from 'next/link';
-
-import {ImageSlideshow} from '@/components/images/ImageSlideshow';
+import { ImageSlideshow } from '@/components/images/ImageSlideshow';
 import classes from './page.module.scss';
 
 export default function Home() {
