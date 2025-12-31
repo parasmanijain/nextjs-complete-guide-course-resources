@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-
 import sql from 'better-sqlite3';
 import slugify from 'slugify';
 import xss from 'xss';
@@ -13,7 +12,7 @@ export async function getMeals() {
   return db.prepare('SELECT * FROM meals').all();
 }
 
-export function getMeal(slug) {
+export function getMeal(slug: string) {
   return db.prepare('SELECT * FROM meals WHERE slug = ?').get(slug);
 }
 
@@ -35,7 +34,8 @@ export async function saveMeal(meal) {
 
   meal.image = `/images/${fileName}`;
 
-  db.prepare(`
+  db.prepare(
+    `
     INSERT INTO meals
       (title, summary, instructions, creator, creator_email, image, slug)
     VALUES (
@@ -47,5 +47,6 @@ export async function saveMeal(meal) {
       @image,
       @slug
     )
-  `).run(meal);
+  `
+  ).run(meal);
 }
