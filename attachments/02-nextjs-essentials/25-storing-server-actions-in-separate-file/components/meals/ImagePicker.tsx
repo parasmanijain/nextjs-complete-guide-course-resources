@@ -1,20 +1,24 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import Image from 'next/image';
-
 import classes from './ImagePicker.module.scss';
 
+interface ImagePickerProps {
+  label?: string;
+  name?: string;
+}
+
 export const ImagePicker = ({ label = '', name = '' }: ImagePickerProps) => {
-  const [pickedImage, setPickedImage] = useState();
-  const imageInput = useRef();
+  const [pickedImage, setPickedImage] = useState<string | null>(null);
+  const imageInput = useRef<HTMLInputElement | null>(null);
 
   function handlePickClick() {
-    imageInput.current.click();
+    imageInput.current?.click();
   }
 
-  function handleImageChange(event) {
-    const file = event.target.files[0];
+  function handleImageChange(event: ChangeEvent<HTMLInputElement>): void {
+    const file = event.target.files?.[0];
 
     if (!file) {
       return;
@@ -23,7 +27,7 @@ export const ImagePicker = ({ label = '', name = '' }: ImagePickerProps) => {
     const fileReader = new FileReader();
 
     fileReader.onload = () => {
-      setPickedImage(fileReader.result);
+      setPickedImage(fileReader.result as string);
     };
 
     fileReader.readAsDataURL(file);
@@ -38,23 +42,23 @@ export const ImagePicker = ({ label = '', name = '' }: ImagePickerProps) => {
           {pickedImage && (
             <Image
               src={pickedImage}
-              alt="The image selected by the user."
+              alt='The image selected by the user.'
               fill
             />
           )}
         </div>
         <input
           className={classes.input}
-          type="file"
+          type='file'
           id={name}
-          accept="image/png, image/jpeg"
+          accept='image/png, image/jpeg'
           name={name}
           ref={imageInput}
           onChange={handleImageChange}
         />
         <button
           className={classes.button}
-          type="button"
+          type='button'
           onClick={handlePickClick}
         >
           Pick an Image
@@ -62,4 +66,4 @@ export const ImagePicker = ({ label = '', name = '' }: ImagePickerProps) => {
       </div>
     </div>
   );
-}
+};
