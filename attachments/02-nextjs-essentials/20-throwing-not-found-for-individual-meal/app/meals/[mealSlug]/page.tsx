@@ -9,7 +9,7 @@ export default function MealDetailsPage({
 }: {
   params: { mealSlug: string };
 }) {
-  const meal = getMeal(params.mealSlug) as MealItemProps; as MealItemProps;
+  const meal = getMeal(params.mealSlug) as MealItemProps;
 
   if (!meal) {
     notFound();
