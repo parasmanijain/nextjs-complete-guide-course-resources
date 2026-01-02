@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import NewsList from '@/components/news-list';
+import { NewsList } from '@/components/NewsList';
 
 export default function NewsPage() {
   const [isLoading, setIsLoading] = useState(false);

@@ -1,4 +1,4 @@
-import NewsList from '@/components/news-list';
+import { NewsList } from '@/components/NewsList';
 import { getAllNews } from '@/lib/news';
 
 export default async function NewsPage() {

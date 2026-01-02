@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 
-import NewsList from '@/components/news-list';
+import { NewsList } from '@/components/NewsList';
 import {
   getAvailableNewsMonths,
   getAvailableNewsYears,
