@@ -3,7 +3,11 @@ import Link from 'next/link';
 
 import { getNewsItem } from '@/lib/news';
 
-export default async function NewsDetailPage({ params }) {
+export default async async function NewsDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const newsSlug = params.slug;
   const newsItem = await getNewsItem(newsSlug)
 
