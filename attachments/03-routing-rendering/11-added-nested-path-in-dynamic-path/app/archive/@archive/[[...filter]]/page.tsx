@@ -1,5 +1,4 @@
 import Link from 'next/link';
-
 import { NewsList } from '@/components/NewsList';
 import {
   getAvailableNewsMonths,

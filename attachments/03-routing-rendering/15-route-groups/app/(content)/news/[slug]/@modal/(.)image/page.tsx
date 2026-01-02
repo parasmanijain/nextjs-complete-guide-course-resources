@@ -7,7 +7,7 @@ import { DUMMY_NEWS } from '@/dummy-news';
 export default function InterceptedImagePage({ params }) {
   const router = useRouter()
 
-  const newsItemSlug = params.slug;
+  const { slug } = await params;
   const newsItem = DUMMY_NEWS.find(
     (newsItem) => newsItem.slug === newsItemSlug
   );
