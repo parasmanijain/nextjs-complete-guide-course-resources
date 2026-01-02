@@ -1,3 +1,5 @@
+import { NewsItem } from './models';
+
 export const DUMMY_NEWS: NewsItem[] = [
   {
     id: 'n1',

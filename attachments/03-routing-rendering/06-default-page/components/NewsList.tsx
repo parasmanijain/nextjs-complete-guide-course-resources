@@ -1,6 +1,7 @@
+import { NewsItem } from '@/models';
 import Link from 'next/link';
 
-export const NewsList({ news }) {
+export const NewsList = ({ news }: { news: NewsItem[] }) => {
   return (
     <ul className="news-list">
       {news.map((newsItem) => (

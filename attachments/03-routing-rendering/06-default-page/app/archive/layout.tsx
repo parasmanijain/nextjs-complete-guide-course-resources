@@ -1,4 +1,9 @@
-export default function ArchiveLayout({ archive, latest }) {
+import { ReactNode } from "react";
+
+export default function ArchiveLayout({ archive, latest }: {
+  archive: ReactNode,
+  latest: ReactNode;
+}) {
   return (
     <div>
       <h1>News Archive</h1>
