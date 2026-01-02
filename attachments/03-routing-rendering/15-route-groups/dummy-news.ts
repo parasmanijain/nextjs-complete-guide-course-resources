@@ -1,4 +1,4 @@
-export const DUMMY_NEWS = [
+export const DUMMY_NEWS: NewsItem[] = [
   {
     id: 'n1',
     slug: 'will-ai-replace-humans',
@@ -14,7 +14,8 @@ export const DUMMY_NEWS = [
     title: 'A Plague of Beavers',
     image: 'beaver.jpg',
     date: '2022-05-01',
-    content: 'Beavers are taking over the world. They are building dams everywhere and flooding entire cities. What can we do to stop them?',
+    content:
+      'Beavers are taking over the world. They are building dams everywhere and flooding entire cities. What can we do to stop them?',
   },
   {
     id: 'n3',
@@ -22,7 +23,8 @@ export const DUMMY_NEWS = [
     title: 'Spend more time together!',
     image: 'couple-cooking.jpg',
     date: '2024-03-01',
-    content: 'Cooking together is a great way to spend more time with your partner. It is fun and you get to eat something delicious afterwards. What are you waiting for? Get cooking!',
+    content:
+      'Cooking together is a great way to spend more time with your partner. It is fun and you get to eat something delicious afterwards. What are you waiting for? Get cooking!',
   },
   {
     id: 'n4',
@@ -30,7 +32,8 @@ export const DUMMY_NEWS = [
     title: 'Hiking is the best!',
     image: 'hiking.jpg',
     date: '2024-01-01',
-    content: 'Hiking is a great way to get some exercise and enjoy the great outdoors. It is also a great way to clear your mind and reduce stress. So what are you waiting for? Get out there and start hiking!',
+    content:
+      'Hiking is a great way to get some exercise and enjoy the great outdoors. It is also a great way to clear your mind and reduce stress. So what are you waiting for? Get out there and start hiking!',
   },
   {
     id: 'n5',
@@ -38,6 +41,7 @@ export const DUMMY_NEWS = [
     title: 'The beauty of landscape',
     image: 'landscape.jpg',
     date: '2022-07-01',
-    content: 'Landscape photography is a great way to capture the beauty of nature. It is also a great way to get outside and enjoy the great outdoors. So what are you waiting for? Get out there and start taking some pictures!',
+    content:
+      'Landscape photography is a great way to capture the beauty of nature. It is also a great way to get outside and enjoy the great outdoors. So what are you waiting for? Get out there and start taking some pictures!',
   },
 ];

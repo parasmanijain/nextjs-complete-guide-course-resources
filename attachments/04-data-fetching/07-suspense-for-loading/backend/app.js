@@ -2,7 +2,7 @@ import express from 'express';
 import sqlite from 'better-sqlite3';
 import cors from 'cors';
 
-const DUMMY_NEWS = [
+const DUMMY_NEWS: NewsItem[] = [
   {
     id: 'n1',
     slug: 'will-ai-replace-humans',
