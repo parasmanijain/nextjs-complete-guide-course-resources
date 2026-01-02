@@ -40,7 +40,7 @@ export default function MealDetailsPage({
       <header className={classes.header}>
         <div className={classes.image}>
           <Image
-            src={`https://maxschwarzmueller-nextjs-demo-users-image.s3.amazonaws.com/${meal.image}`}
+            src={`https://paras-jain-my-bucket.s3.us-east-1.amazonaws.com/${meal.image}`}
             alt={meal.title}
             fill
           />

@@ -30,7 +30,7 @@ export async function saveMeal(meal: MealInput) {
   const bufferedImage = await meal.image.arrayBuffer();
 
   s3.putObject({
-    Bucket: 'maxschwarzmueller-nextjs-demo-users-image',
+    Bucket: 'paras-jain-my-bucket',
     Key: fileName,
     Body: Buffer.from(bufferedImage),
     ContentType: meal.image.type,

@@ -15,7 +15,7 @@ export const MealItem = ({
       <header>
         <div className={classes.image}>
           <Image
-            src={`https://maxschwarzmueller-nextjs-demo-users-image.s3.amazonaws.com/${image}`}
+            src={`https://paras-jain-my-bucket.s3.us-east-1.amazonaws.com/${image}`}
             alt={title}
             fill
           />
