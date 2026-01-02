@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { MainHeader } from '@/components/MainHeader';
 import './globals.scss';
 

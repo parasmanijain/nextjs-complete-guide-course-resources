@@ -1,8 +1,11 @@
 import { DUMMY_NEWS } from '@/dummy-news';
 
-export default function NewsDetailPage({ params }) {
+export default function NewsDetailPage({ params }: { params: { slug: string } }) {
   const newsSlug = params.slug;
   const newsItem = DUMMY_NEWS.find((newsItem) => newsItem.slug === newsSlug);
+  if (!newsItem) {
+    return <></>
+  }
   return (
     <article className="news-article">
       <header>

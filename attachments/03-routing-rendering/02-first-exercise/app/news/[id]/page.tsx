@@ -1,4 +1,4 @@
-export default function NewsDetailPage({ params }) {
+export default function NewsDetailPage({ params }: { params: { id: string } }) {
   const newsId = params.id;
   return (
     <>
