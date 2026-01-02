@@ -15,9 +15,10 @@ export const MealItem = ({
       <header>
         <div className={classes.image}>
           <Image
-            src={`https://paras-jain-my-bucket.s3.us-east-1.amazonaws.com/${image}`}
+            src={`https://paras-jain-my-bucket.s3.us-east-1.amazonaws.com/public/images/${image}`}
             alt={title}
             fill
+            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
           />
         </div>
         <div className={classes.headerText}>
@@ -33,4 +34,4 @@ export const MealItem = ({
       </div>
     </article>
   );
-}
+};

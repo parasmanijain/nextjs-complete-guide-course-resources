@@ -8,9 +8,10 @@ import classes from './page.module.scss';
 export async function generateMetadata({
   params,
 }: {
-  params: { mealSlug: string };
+  params: Promise<{ mealSlug: string }>;
 }): Promise<Metadata> {
-  const meal = getMeal(params.mealSlug) as MealItemProps;
+  const { mealSlug } = await params;
+  const meal = getMeal(mealSlug) as MealItemProps;
 
   if (!meal) {
     notFound();
@@ -22,12 +23,13 @@ export async function generateMetadata({
   };
 }
 
-export default function MealDetailsPage({
+export default async function MealDetailsPage({
   params,
 }: {
-  params: { mealSlug: string };
+  params: Promise<{ mealSlug: string }>;
 }) {
-  const meal = getMeal(params.mealSlug) as MealItemProps;
+  const { mealSlug } = await params;
+  const meal = getMeal(mealSlug) as MealItemProps;
 
   if (!meal) {
     notFound();
@@ -40,9 +42,11 @@ export default function MealDetailsPage({
       <header className={classes.header}>
         <div className={classes.image}>
           <Image
-            src={`https://paras-jain-my-bucket.s3.us-east-1.amazonaws.com/${meal.image}`}
+            src={`https://paras-jain-my-bucket.s3.us-east-1.amazonaws.com/public/images/${meal.image}`}
             alt={meal.title}
             fill
+            sizes='(max-width: 768px) 100vw, 50vw'
+            priority
           />
         </div>
         <div className={classes.headerText}>
@@ -56,10 +60,8 @@ export default function MealDetailsPage({
       <main>
         <p
           className={classes.instructions}
-          dangerouslySetInnerHTML={{
-            __html: meal.instructions,
-          }}
-        ></p>
+          dangerouslySetInnerHTML={{ __html: meal.instructions }}
+        />
       </main>
     </>
   );

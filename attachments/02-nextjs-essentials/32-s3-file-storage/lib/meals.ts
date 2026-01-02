@@ -29,7 +29,7 @@ export async function saveMeal(meal: MealInput) {
 
   const bufferedImage = await meal.image.arrayBuffer();
 
-  s3.putObject({
+  await s3.putObject({
     Bucket: 'paras-jain-my-bucket',
     Key: fileName,
     Body: Buffer.from(bufferedImage),

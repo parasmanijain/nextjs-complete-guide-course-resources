@@ -8,9 +8,10 @@ import classes from './page.module.scss';
 export async function generateMetadata({
   params,
 }: {
-  params: { mealSlug: string };
+  params: Promise<{ mealSlug: string }>;
 }): Promise<Metadata> {
-  const meal = getMeal(params.mealSlug) as MealItemProps;
+  const { mealSlug } = await params;
+  const meal = getMeal(mealSlug) as MealItemProps;
 
   if (!meal) {
     notFound();
@@ -22,12 +23,13 @@ export async function generateMetadata({
   };
 }
 
-export default function MealDetailsPage({
+export default async function MealDetailsPage({
   params,
 }: {
-  params: { mealSlug: string };
+  params: Promise<{ mealSlug: string }>;
 }) {
-  const meal = getMeal(params.mealSlug) as MealItemProps;
+  const { mealSlug } = await params;
+  const meal = getMeal(mealSlug) as MealItemProps;
 
   if (!meal) {
     notFound();
