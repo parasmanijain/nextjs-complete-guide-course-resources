@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { NewsItem } from '@/models';
 
 export const NewsList = ({ news }: { news: NewsItem[] }) => {
   return (

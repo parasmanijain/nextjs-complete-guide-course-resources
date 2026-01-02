@@ -11,7 +11,7 @@ import {
 export default async function FilteredNewsPage({ params }: {
   params: Promise<{ filter: string[] }>;
 }) {
-  const filter = params.filter;
+  const { filter } = await params;
 
   const selectedYear = filter?.[0];
   const selectedMonth = filter?.[1];
