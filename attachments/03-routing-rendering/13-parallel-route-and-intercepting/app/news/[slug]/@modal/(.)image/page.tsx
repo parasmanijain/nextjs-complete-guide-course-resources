@@ -1,11 +1,12 @@
 import { notFound } from 'next/navigation';
-
 import { DUMMY_NEWS } from '@/dummy-news';
 
-export default function InterceptedImagePage({ params }) {
+export default async function InterceptedImagePage({ params }: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const newsItem = DUMMY_NEWS.find(
-    (newsItem) => newsItem.slug === newsItemSlug
+    (newsItem) => newsItem.slug === slug
   );
 
   if (!newsItem) {
