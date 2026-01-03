@@ -3,9 +3,12 @@ import { DUMMY_NEWS } from '@/dummy-news';
 
 const db = sql('data.db');
 
+const delay = (ms = 2000) =>
+  new Promise<void>((resolve) => setTimeout(resolve, ms));
+
 export async function getAllNews() {
   const news = db.prepare('SELECT * FROM news').all();
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await delay();
   return news;
 }
 
