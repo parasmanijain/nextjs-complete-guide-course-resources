@@ -1,4 +1,4 @@
-export function GET(request) {
+export function GET(request: Request) {
   console.log(request);
 
   // return Response.json();
