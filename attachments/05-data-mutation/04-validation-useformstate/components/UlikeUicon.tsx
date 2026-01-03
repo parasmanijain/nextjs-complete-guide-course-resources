@@ -1,4 +1,4 @@
-export const LikeButton() {
+export const LikeButton = () => {
   return (
     <button className="like-button">
       <svg

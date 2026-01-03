@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import logo from '@/assets/logo.png';
 
-export const Header() {
+export const Header = () => {
   return (
     <header id="main-header">
       <Link href="/">

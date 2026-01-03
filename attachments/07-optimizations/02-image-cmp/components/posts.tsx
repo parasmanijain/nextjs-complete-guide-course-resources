@@ -4,7 +4,7 @@ import { useOptimistic } from 'react';
 import Image from 'next/image';
 
 import { formatDate } from '@/lib/format';
-import LikeButton from './like-icon';
+import { LikeButton } from './LikeButton';
 import { togglePostLikeStatus } from '@/actions/posts';
 
 function imageLoader(config) {
@@ -46,7 +46,7 @@ function Post({ post, action }) {
   );
 }
 
-export const Posts({ posts }) {
+export const Posts = ({ posts }) => {
   const [optimisticPosts, updateOptimisticPosts] = useOptimistic(
     posts,
     (prevPosts, updatedPostId) => {

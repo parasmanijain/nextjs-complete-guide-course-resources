@@ -26,7 +26,7 @@ export const PostForm({ action }) {
         </p>
         <p className="form-control">
           <label htmlFor="content">Content</label>
-          <textarea id="content" name="content" rows="5" />
+          <textarea id="content" name="content" rows={5} />
         </p>
         <p className="form-actions">
           <FormSubmit />

@@ -20,7 +20,7 @@ export default function NewMessagePage() {
       <form action={createMessage}>
         <p className="form-control">
           <label htmlFor="message">Your Message</label>
-          <textarea id="message" name="message" required rows="5" />
+          <textarea id="message" name="message" required rows={5} />
         </p>
 
         <p className="form-actions">

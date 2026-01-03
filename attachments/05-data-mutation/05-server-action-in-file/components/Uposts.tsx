@@ -1,5 +1,5 @@
 import { formatDate } from '@/lib/format';
-import LikeButton from './like-icon';
+import { LikeButton } from './LikeButton';
 
 function Post({ post }) {
   return (
@@ -28,7 +28,7 @@ function Post({ post }) {
   );
 }
 
-export const Posts({ posts }) {
+export const Posts = ({ posts }) => {
   if (!posts || posts.length === 0) {
     return <p>There are no posts yet. Maybe start sharing some?</p>;
   }
