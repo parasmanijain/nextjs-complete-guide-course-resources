@@ -1,14 +1,13 @@
 import { redirect } from 'next/navigation';
-
 import { storePost } from '@/lib/posts';
-import PostForm from '@/components/post-form';
+import { PostForm } from '@/components/PostForm';
 
 export default function NewPostPage() {
-  async function createPost(prevState, formData) {
+  async function createPost(_: any, formData: FormData) {
     'use server';
-    const title = formData.get('title');
-    const image = formData.get('image');
-    const content = formData.get('content');
+    const title = formData.get('title') as string;
+    const image = formData.get('image') as File;
+    const content = formData.get('content') as string;
 
     let errors = [];
 

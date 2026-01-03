@@ -1,10 +1,9 @@
 'use client';
 
 import { useActionState } from 'react';
+import { FormSubmit } from '@/components/FormSubmit';
 
-import FormSubmit from '@/components/form-submit';
-
-export const PostForm({ action }) {
+export const PostForm = ({ action }) => {
   const [state, formAction] = useActionState(action, {});
 
   return (

@@ -1,5 +1,6 @@
-import { Header } from '@/components/Header';
 import './globals.scss';
+import { Header } from '@/components/Header';
+import { ReactNode } from 'react';
 
 export const metadata = {
   title: 'NextPosts',

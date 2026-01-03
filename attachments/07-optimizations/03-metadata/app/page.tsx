@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { Posts } from '@/components/posts';
+import { Posts } from '@/components/Posts';
 import { getPosts } from '@/lib/posts';
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 async function LatestPosts() {
-  const latestPosts = await getPosts(2);
+  const latestPosts = await getPosts(2) as PostWithMeta[];
   return <Posts posts={latestPosts} />;
 }
 
