@@ -1,8 +1,6 @@
-import express from 'express';
-import sqlite from 'better-sqlite3';
-import cors from 'cors';
+import { NewsItem } from './models';
 
-const DUMMY_NEWS: NewsItem[] = [
+export const DUMMY_NEWS: NewsItem[] = [
   {
     id: 'n1',
     slug: 'will-ai-replace-humans',
@@ -49,38 +47,3 @@ const DUMMY_NEWS: NewsItem[] = [
       'Landscape photography is a great way to capture the beauty of nature. It is also a great way to get outside and enjoy the great outdoors. So what are you waiting for? Get out there and start taking some pictures!',
   },
 ];
-
-const db = sqlite('data.db');
-
-function initDb() {
-  db.prepare(
-    'CREATE TABLE IF NOT EXISTS news (id INTEGER PRIMARY KEY, slug TEXT UNIQUE, title TEXT, content TEXT, date TEXT, image TEXT)'
-  ).run();
-
-const stmt = db.prepare<[], { count: number }>(
-    'SELECT COUNT(*) as count FROM news'
-  );
-
-  if (count === 0) {
-    const insert = db.prepare(
-      'INSERT INTO news (slug, title, content, date, image) VALUES (?, ?, ?, ?, ?)'
-    );
-
-    DUMMY_NEWS.forEach((news) => {
-      insert.run(news.slug, news.title, news.content, news.date, news.image);
-    });
-  }
-}
-
-const app = express();
-
-app.use(cors())
-
-app.get('/news', (req, res) => {
-  const news = db.prepare('SELECT * FROM news').all();
-  res.json(news);
-});
-
-initDb();
-
-app.listen(8080);

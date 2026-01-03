@@ -57,7 +57,9 @@ function initDb() {
     'CREATE TABLE IF NOT EXISTS news (id INTEGER PRIMARY KEY, slug TEXT UNIQUE, title TEXT, content TEXT, date TEXT, image TEXT)'
   ).run();
 
-  const { count } = db.prepare('SELECT COUNT(*) as count FROM news').get();
+const stmt = db.prepare<[], { count: number }>(
+    'SELECT COUNT(*) as count FROM news'
+  );
 
   if (count === 0) {
     const insert = db.prepare(

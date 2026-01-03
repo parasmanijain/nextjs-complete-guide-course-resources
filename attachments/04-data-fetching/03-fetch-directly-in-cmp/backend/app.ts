@@ -1,6 +1,7 @@
-import express from 'express';
+import express, { Response } from 'express';
 import sqlite from 'better-sqlite3';
 import cors from 'cors';
+import { NewsItem } from '@/models';
 
 const DUMMY_NEWS: NewsItem[] = [
   {
@@ -57,9 +58,12 @@ function initDb() {
     'CREATE TABLE IF NOT EXISTS news (id INTEGER PRIMARY KEY, slug TEXT UNIQUE, title TEXT, content TEXT, date TEXT, image TEXT)'
   ).run();
 
-  const { count } = db.prepare('SELECT COUNT(*) as count FROM news').get();
+  const stmt = db.prepare<[], { count: number }>(
+    'SELECT COUNT(*) as count FROM news'
+  );
+  const row = stmt.get();
 
-  if (count === 0) {
+  if (row && row.count === 0) {
     const insert = db.prepare(
       'INSERT INTO news (slug, title, content, date, image) VALUES (?, ?, ?, ?, ?)'
     );
@@ -72,9 +76,9 @@ function initDb() {
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 
-app.get('/news', (req, res) => {
+app.get('/news', (_, res: Response) => {
   const news = db.prepare('SELECT * FROM news').all();
   res.json(news);
 });
