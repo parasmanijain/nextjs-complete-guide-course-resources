@@ -1,7 +1,16 @@
 import { formatDate } from '@/lib/format';
 import { LikeButton } from './LikeButton';
+import type { PostWithMeta } from '@/models';
 
-function Post({ post }) {
+interface PostProps {
+  post: PostWithMeta;
+}
+
+interface PostsProps {
+  posts: PostWithMeta[];
+}
+
+export function Post({ post }: PostProps) {
   return (
     <article className="post">
       <div className="post-image">
@@ -28,7 +37,7 @@ function Post({ post }) {
   );
 }
 
-export const Posts = ({ posts }) => {
+export function Posts({ posts }: PostsProps) {
   if (!posts || posts.length === 0) {
     return <p>There are no posts yet. Maybe start sharing some?</p>;
   }
