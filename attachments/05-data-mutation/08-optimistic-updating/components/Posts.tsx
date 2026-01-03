@@ -1,12 +1,21 @@
 "use client";
 
 import { useOptimistic } from 'react';
-
 import { formatDate } from '@/lib/format';
 import { LikeButton } from './LikeButton';
 import { togglePostLikeStatus } from '@/actions/posts';
+import { PostWithMeta } from '@/models';
 
-function Post({ post, action }) {
+interface PostProps {
+  post: PostWithMeta;
+  action: (a: number) => Promise<void>;
+}
+
+interface PostsProps {
+  posts: PostWithMeta[];
+}
+
+function Post({ post, action }: PostProps) {
   return (
     <article className="post">
       <div className="post-image">
@@ -38,7 +47,7 @@ function Post({ post, action }) {
   );
 }
 
-export const Posts = ({ posts }) => {
+export const Posts = ({ posts }: PostsProps) => {
   const [optimisticPosts, updateOptimisticPosts] = useOptimistic(posts, (prevPosts, updatedPostId) => {
     const updatedPostIndex = prevPosts.findIndex(post => post.id === updatedPostId);
 
@@ -58,7 +67,7 @@ export const Posts = ({ posts }) => {
     return <p>There are no posts yet. Maybe start sharing some?</p>;
   }
 
-  async function updatePost(postId) {
+  async function updatePost(postId: number) {
     updateOptimisticPosts(postId);
     await togglePostLikeStatus(postId);
   }

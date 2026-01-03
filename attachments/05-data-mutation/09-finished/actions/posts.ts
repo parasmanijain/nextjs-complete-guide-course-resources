@@ -6,10 +6,10 @@ import { redirect } from 'next/navigation';
 import { storePost, updatePostLikeStatus } from '@/lib/posts';
 import { uploadImage } from '@/lib/cloudinary';
 
-export async function createPost(prevState, formData) {
-  const title = formData.get('title');
-  const image = formData.get('image');
-  const content = formData.get('content');
+export async function createPost(_: any, formData: FormData) {
+  const title = formData.get('title') as string;
+  const image = formData.get('image') as File;
+  const content = formData.get('content') as string;
 
   let errors = [];
 
@@ -50,7 +50,7 @@ export async function createPost(prevState, formData) {
   redirect('/feed');
 }
 
-export async function togglePostLikeStatus(postId) {
+export async function togglePostLikeStatus(postId: number) {
   await updatePostLikeStatus(postId, 2);
   revalidatePath('/', 'layout');
 }

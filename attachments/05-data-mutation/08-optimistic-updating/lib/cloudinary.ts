@@ -18,12 +18,11 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function uploadImage(image) {
+export async function uploadImage(image: File): Promise<string> {
   const imageData = await image.arrayBuffer();
-  const mime = image.type;
-  const encoding = 'base64';
+  const mimeType = image.type;
   const base64Data = Buffer.from(imageData).toString('base64');
-  const fileUri = 'data:' + mime + ';' + encoding + ',' + base64Data;
+  const fileUri = `data:${mimeType};base64,${base64Data}`;
   const result = await cloudinary.uploader.upload(fileUri, {
     folder: 'nextjs-course-mutations',
   });
