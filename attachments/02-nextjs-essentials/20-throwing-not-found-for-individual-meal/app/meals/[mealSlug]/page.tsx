@@ -1,14 +1,12 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { MealItemProps } from 'models';
+import { MealItemProps, MealSlugParams } from 'models';
 import { getMeal } from '@/lib/meals';
 import classes from './page.module.scss';
 
 export default async function MealDetailsPage({
   params,
-}: {
-  params: Promise<{ mealSlug: string }>;
-}) {
+}: MealSlugParams) {
   const { mealSlug } = await params;
   const meal = getMeal(mealSlug) as MealItemProps;
   if (!meal) {

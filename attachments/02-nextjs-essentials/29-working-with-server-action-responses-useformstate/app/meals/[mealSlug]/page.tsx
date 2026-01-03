@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMeal } from '@/lib/meals';
-import { MealItemProps } from '@/models';
+import { MealItemProps, MealSlugParams } from '@/models';
 import classes from './page.module.scss';
 
-export default function MealDetailsPage({ params }: { params: { mealSlug: string }; }) {
-  const meal = getMeal(params.mealSlug) as MealItemProps;;
+export default async function MealDetailsPage({ params }: MealSlugParams) {
+  const { mealSlug } = await params;
+  const meal = getMeal(mealSlug) as MealItemProps;;
 
   if (!meal) {
     notFound();

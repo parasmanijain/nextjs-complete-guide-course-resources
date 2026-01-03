@@ -11,6 +11,10 @@ export interface MealItemProps {
   instructions: string;
 }
 
+export interface MealSlugParams {
+  params: Promise<{ mealSlug: string }>;
+}
+
 export interface NavLinkProps {
   href: string;
   children: ReactNode;

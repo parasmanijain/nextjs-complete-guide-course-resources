@@ -2,14 +2,12 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMeal } from '@/lib/meals';
-import { MealItemProps } from '@/models';
+import { MealItemProps, MealSlugParams } from '@/models';
 import classes from './page.module.scss';
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ mealSlug: string }>;
-}): Promise<Metadata> {
+}: MealSlugParams): Promise<Metadata> {
   const { mealSlug } = await params;
   const meal = getMeal(mealSlug) as MealItemProps;
 
@@ -25,9 +23,7 @@ export async function generateMetadata({
 
 export default async function MealDetailsPage({
   params,
-}: {
-  params: Promise<{ mealSlug: string }>;
-}) {
+}: MealSlugParams) {
   const { mealSlug } = await params;
   const meal = getMeal(mealSlug) as MealItemProps;
 
