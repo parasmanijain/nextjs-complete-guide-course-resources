@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-
 import { DUMMY_NEWS } from '@/dummy-news';
 
 export default async function NewsDetailPage({
