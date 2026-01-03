@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export default function ArchiveLayout({ archive, latest }: {
   archive: ReactNode,
   latest: ReactNode;
