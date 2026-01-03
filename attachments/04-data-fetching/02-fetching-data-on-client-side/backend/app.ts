@@ -1,8 +1,11 @@
-import express from 'express';
-import sqlite from 'better-sqlite3';
+import express, { Request, Response } from 'express';
+import Database from 'better-sqlite3';
 import cors from 'cors';
-import { NewsItem } from '@/models';
+import { NewsItem } from './models/index.js';
 
+/**
+ * Dummy data
+ */
 const DUMMY_NEWS: NewsItem[] = [
   {
     id: 'n1',
@@ -11,7 +14,7 @@ const DUMMY_NEWS: NewsItem[] = [
     image: 'ai-robot.jpg',
     date: '2021-07-01',
     content:
-      'Since late 2022 AI is on the rise and therefore many people worry whether AI will replace humans. The answer is not that simple. AI is a tool that can be used to automate tasks, but it can also be used to augment human capabilities. The future is not set in stone, but it is clear that AI will play a big role in the future. The question is how we will use it.',
+      'Since late 2022 AI is on the rise and therefore many people worry whether AI will replace humans...',
   },
   {
     id: 'n2',
@@ -20,7 +23,7 @@ const DUMMY_NEWS: NewsItem[] = [
     image: 'beaver.jpg',
     date: '2022-05-01',
     content:
-      'Beavers are taking over the world. They are building dams everywhere and flooding entire cities. What can we do to stop them?',
+      'Beavers are taking over the world. They are building dams everywhere...',
   },
   {
     id: 'n3',
@@ -29,7 +32,7 @@ const DUMMY_NEWS: NewsItem[] = [
     image: 'couple-cooking.jpg',
     date: '2024-03-01',
     content:
-      'Cooking together is a great way to spend more time with your partner. It is fun and you get to eat something delicious afterwards. What are you waiting for? Get cooking!',
+      'Cooking together is a great way to spend more time with your partner...',
   },
   {
     id: 'n4',
@@ -38,7 +41,7 @@ const DUMMY_NEWS: NewsItem[] = [
     image: 'hiking.jpg',
     date: '2024-01-01',
     content:
-      'Hiking is a great way to get some exercise and enjoy the great outdoors. It is also a great way to clear your mind and reduce stress. So what are you waiting for? Get out there and start hiking!',
+      'Hiking is a great way to get some exercise and enjoy the great outdoors...',
   },
   {
     id: 'n5',
@@ -47,39 +50,60 @@ const DUMMY_NEWS: NewsItem[] = [
     image: 'landscape.jpg',
     date: '2022-07-01',
     content:
-      'Landscape photography is a great way to capture the beauty of nature. It is also a great way to get outside and enjoy the great outdoors. So what are you waiting for? Get out there and start taking some pictures!',
+      'Landscape photography is a great way to capture the beauty of nature...',
   },
 ];
 
-const db = sqlite('data.db');
+/**
+ * Database
+ */
+const db = new Database('data.db');
 
-function initDb() {
+function initDb(): void {
   db.prepare(
-    'CREATE TABLE IF NOT EXISTS news (id INTEGER PRIMARY KEY, slug TEXT UNIQUE, title TEXT, content TEXT, date TEXT, image TEXT)'
+    `
+    CREATE TABLE IF NOT EXISTS news (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      slug TEXT UNIQUE,
+      title TEXT,
+      content TEXT,
+      date TEXT,
+      image TEXT
+    )
+  `
   ).run();
 
-  const { count } = db.prepare('SELECT COUNT(*) as count FROM news').get();
+  const stmt = db.prepare<[], { count: number }>(
+    'SELECT COUNT(*) as count FROM news'
+  );
 
-  if (count === 0) {
+  const row = stmt.get();
+  if (row && row.count === 0) {
     const insert = db.prepare(
       'INSERT INTO news (slug, title, content, date, image) VALUES (?, ?, ?, ?, ?)'
     );
 
-    DUMMY_NEWS.forEach((news) => {
+    for (const news of DUMMY_NEWS) {
       insert.run(news.slug, news.title, news.content, news.date, news.image);
-    });
+    }
   }
 }
 
+/**
+ * Express app
+ */
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
-app.get('/news', (req, res) => {
+app.get('/news', (_req: Request, res: Response) => {
   const news = db.prepare('SELECT * FROM news').all();
   res.json(news);
 });
 
 initDb();
 
-app.listen(8080);
+app.listen(8080, () => {
+  console.log('Server running on http://localhost:8080');
+});
