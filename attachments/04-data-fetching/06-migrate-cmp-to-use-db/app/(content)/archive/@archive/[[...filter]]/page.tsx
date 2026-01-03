@@ -6,11 +6,9 @@ import {
   getNewsForYear,
   getNewsForYearAndMonth,
 } from '@/lib/news';
-import { NewsItem } from '@/models';
+import { FiltersParams, NewsItem } from '@/models';
 
-export default async function FilteredNewsPage({ params }: {
-  params: Promise<{ filter: string[] }>;
-}) {
+export default async function FilteredNewsPage({ params }: FiltersParams) {
   const { filter } = await params;
 
   const selectedYear = filter?.[0];

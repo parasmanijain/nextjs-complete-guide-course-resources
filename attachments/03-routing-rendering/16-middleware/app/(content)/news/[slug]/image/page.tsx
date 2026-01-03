@@ -1,10 +1,8 @@
 import { notFound } from 'next/navigation';
-
 import { DUMMY_NEWS } from '@/dummy-news';
+import { SlugParams } from '@/models';
 
-export default async function ImagePage({ params }: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function ImagePage({ params }: SlugParams) {
   const { slug } = await params;
   const newsItem = DUMMY_NEWS.find((newsItem) => newsItem.slug === slug);
 

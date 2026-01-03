@@ -6,3 +6,7 @@ export interface NewsItem {
   date: string; // ISO date string (YYYY-MM-DD)
   content: string;
 }
+
+export interface SlugParams {
+  params: Promise<{ slug: string }>;
+}

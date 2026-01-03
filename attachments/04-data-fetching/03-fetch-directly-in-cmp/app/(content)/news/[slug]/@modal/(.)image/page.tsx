@@ -2,10 +2,9 @@
 
 import { notFound, useRouter } from 'next/navigation';
 import { DUMMY_NEWS } from '@/dummy-news';
+import { SlugParams } from '@/models';
 
-export default async function InterceptedImagePage({ params }: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function InterceptedImagePage({ params }: SlugParams) {
   const router = useRouter()
 
   const { slug } = await params;

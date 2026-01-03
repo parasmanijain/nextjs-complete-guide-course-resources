@@ -1,13 +1,11 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-
 import { DUMMY_NEWS } from '@/dummy-news';
+import { SlugParams } from '@/models';
 
 export default async function NewsDetailPage({
   params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+}: SlugParams) {
   const { slug } = await params;
   const newsItem = DUMMY_NEWS.find((newsItem) => newsItem.slug === slug);
 

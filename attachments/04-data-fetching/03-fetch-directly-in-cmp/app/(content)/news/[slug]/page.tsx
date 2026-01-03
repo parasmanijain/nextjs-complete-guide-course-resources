@@ -4,9 +4,7 @@ import { DUMMY_NEWS } from '@/dummy-news';
 
 export default async function NewsDetailPage({
   params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+}: SlugParams) {
   const { slug } = await params;
   const newsItem = DUMMY_NEWS.find((newsItem) => newsItem.slug === slug);
 

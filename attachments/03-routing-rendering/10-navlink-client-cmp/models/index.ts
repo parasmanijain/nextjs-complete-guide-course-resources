@@ -9,6 +9,14 @@ export interface NewsItem {
   content: string;
 }
 
+export interface SlugParams {
+  params: Promise<{ slug: string }>;
+}
+
+export interface FiltersParams {
+  params: Promise<{ filter: string[] }>;
+}
+
 export interface NavLinkProps {
   href: string;
   children: ReactNode;
