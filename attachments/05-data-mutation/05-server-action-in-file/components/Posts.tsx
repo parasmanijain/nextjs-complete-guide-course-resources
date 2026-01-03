@@ -1,8 +1,16 @@
 import { formatDate } from '@/lib/format';
 import { LikeButton } from './LikeButton';
-import { togglePostLikeStatus } from '@/actions/posts';
+import { PostWithMeta } from '@/models';
 
-function Post({ post }) {
+interface PostProps {
+  post: PostWithMeta;
+}
+
+interface PostsProps {
+  posts: PostWithMeta[];
+}
+
+function Post({ post }: PostProps) {
   return (
     <article className="post">
       <div className="post-image">
@@ -20,12 +28,7 @@ function Post({ post }) {
             </p>
           </div>
           <div>
-            <form
-              action={togglePostLikeStatus.bind(null, post.id)}
-              className={post.isLiked ? 'liked' : ''}
-            >
-              <LikeButton />
-            </form>
+            <LikeButton />
           </div>
         </header>
         <p>{post.content}</p>
@@ -34,7 +37,7 @@ function Post({ post }) {
   );
 }
 
-export const Posts = ({ posts }) => {
+export const Posts = ({ posts }: PostsProps) => {
   if (!posts || posts.length === 0) {
     return <p>There are no posts yet. Maybe start sharing some?</p>;
   }
