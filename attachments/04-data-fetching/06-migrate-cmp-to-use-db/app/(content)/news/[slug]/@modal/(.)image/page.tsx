@@ -1,11 +1,13 @@
 import { notFound } from 'next/navigation';
-
-import ModalBackdrop from '@/components/modal-backdrop';
+import { ModalBackdrop } from '@/components/ModalBackdrop';
 import { getNewsItem } from '@/lib/news';
+import { NewsItem } from '@/models';
 
-export default async function InterceptedImagePage({ params }) {
+export default async function InterceptedImagePage({ params }: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  const newsItem = await getNewsItem(newsItemSlug);
+  const newsItem = await getNewsItem(slug) as NewsItem;
 
   if (!newsItem) {
     notFound();

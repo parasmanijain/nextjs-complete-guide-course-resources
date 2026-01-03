@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
-
 import { NewsList } from '@/components/NewsList';
 import {
   getAvailableNewsMonths,
@@ -8,9 +7,10 @@ import {
   getNewsForYear,
   getNewsForYearAndMonth,
 } from '@/lib/news';
+import { NewsItem } from '@/models';
 
-async function FilterHeader({ year, month }) {
-  const availableYears = await getAvailableNewsYears();
+async function FilterHeader({ year, month }: { year: string; month: string }) {
+  const availableYears = (await getAvailableNewsYears()) as string[];
   let links = availableYears;
 
   if (
@@ -29,13 +29,11 @@ async function FilterHeader({ year, month }) {
   }
 
   return (
-    <header id="archive-header">
+    <header id='archive-header'>
       <nav>
         <ul>
           {links.map((link) => {
-            const href = year
-              ? `/archive/${year}/${link}`
-              : `/archive/${link}`;
+            const href = year ? `/archive/${year}/${link}` : `/archive/${link}`;
 
             return (
               <li key={link}>
@@ -49,13 +47,13 @@ async function FilterHeader({ year, month }) {
   );
 }
 
-async function FilteredNews({ year, month }) {
+async function FilteredNews({ year, month }: { year: string; month: string }) {
   let news;
 
   if (year && !month) {
-    news = await getNewsForYear(year);
+    news = (await getNewsForYear(year)) as NewsItem[];
   } else if (year && month) {
-    news = await getNewsForYearAndMonth(year, month);
+    news = (await getNewsForYearAndMonth(year, month)) as NewsItem[];
   }
 
   let newsContent = <p>No news found for the selected period.</p>;
@@ -67,7 +65,11 @@ async function FilteredNews({ year, month }) {
   return newsContent;
 }
 
-export default async function FilteredNewsPage({ params }) {
+export default async function FilteredNewsPage({
+  params,
+}: {
+  params: Promise<{ filter: string[] }>;
+}) {
   const { filter } = await params;
 
   const selectedYear = filter?.[0];

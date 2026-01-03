@@ -1,9 +1,10 @@
 import { NewsList } from '@/components/NewsList';
 import { getNewsForYear } from '@/lib/news';
+import { NewsItem } from '@/models';
 
-export default function FilteredNewsPage({ params }: { params: { year: number } }) {
-  const newsYear = params.year;
-  const news = getNewsForYear(newsYear);
+export default async function FilteredNewsPage({ params }: { params: Promise<{ year: string }> }) {
+  const { year } = await params;
+  const news = getNewsForYear(year) as NewsItem[];
 
   return <NewsList news={news} />
 }

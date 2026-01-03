@@ -1,10 +1,13 @@
 import { notFound } from 'next/navigation';
 
 import { getNewsItem } from '@/lib/news';
+import { NewsItem } from '@/models';
 
-export default async function ImagePage({ params }) {
+export default async function ImagePage({ params }: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  const newsItem = await getNewsItem(newsItemSlug);
+  const newsItem = await getNewsItem(slug) as NewsItem;
 
   if (!newsItem) {
     notFound();

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import ModalBackdrop from '@/components/modal-backdrop';
+import { ModalBackdrop } from '@/components/ModalBackdrop';
 import { getNewsItem } from '@/lib/news';
 
 export default async function InterceptedImagePage({ params }) {
