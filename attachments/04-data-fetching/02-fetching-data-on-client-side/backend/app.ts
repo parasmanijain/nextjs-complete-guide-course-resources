@@ -1,6 +1,7 @@
 import express from 'express';
 import sqlite from 'better-sqlite3';
 import cors from 'cors';
+import { NewsItem } from '@/models';
 
 const DUMMY_NEWS: NewsItem[] = [
   {
@@ -72,7 +73,7 @@ function initDb() {
 
 const app = express();
 
-app.use(cors())
+app.use(cors());
 
 app.get('/news', (req, res) => {
   const news = db.prepare('SELECT * FROM news').all();

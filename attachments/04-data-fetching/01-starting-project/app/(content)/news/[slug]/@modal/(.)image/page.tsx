@@ -1,7 +1,6 @@
 "use client";
 
 import { notFound, useRouter } from 'next/navigation';
-
 import { DUMMY_NEWS } from '@/dummy-news';
 
 export default async function InterceptedImagePage({ params }: {

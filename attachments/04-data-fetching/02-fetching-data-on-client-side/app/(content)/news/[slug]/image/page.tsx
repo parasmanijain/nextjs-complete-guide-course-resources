@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation';
-
 import { DUMMY_NEWS } from '@/dummy-news';
 
 export default async function ImagePage({ params }: {

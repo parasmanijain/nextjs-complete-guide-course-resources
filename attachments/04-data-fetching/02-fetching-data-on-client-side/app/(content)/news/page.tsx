@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-
 import { NewsList } from '@/components/NewsList';
 
 export default function NewsPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState<string>();
   const [news, setNews] = useState();
 
   useEffect(() => {

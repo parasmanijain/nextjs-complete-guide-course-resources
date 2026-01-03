@@ -1,3 +1,4 @@
+import { NewsItem } from '@/models';
 import Link from 'next/link';
 
 export const NewsList = ({ news }: { news: NewsItem[] }) => {

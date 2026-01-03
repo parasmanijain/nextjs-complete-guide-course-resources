@@ -35,7 +35,7 @@ export async function getAvailableNewsYears() {
   return years;
 }
 
-export function getAvailableNewsMonths(year) {
+export function getAvailableNewsMonths(year:string) {
   return db
     .prepare(
       "SELECT DISTINCT strftime('%m', date) as month FROM news WHERE strftime('%Y', date) = ?"
