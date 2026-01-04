@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { getMessages } from '@/lib/messages';
 
 export default async function MessagesLayout({ children }: { children: ReactNode }) {

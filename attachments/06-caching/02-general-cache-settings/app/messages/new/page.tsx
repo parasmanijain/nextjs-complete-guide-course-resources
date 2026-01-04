@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation';
-
 import { addMessage } from '@/lib/messages';
 
 export default function NewMessagePage() {
