@@ -1,4 +1,4 @@
-export default async function MessagesLayout({ children }) {
+export default async function MessagesLayout({ children }: { children: ReactNode }) {
   const response = await fetch('http://localhost:8080/messages');
   const messages = await response.json();
   const totalMessages = messages.length;

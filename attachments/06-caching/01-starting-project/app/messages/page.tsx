@@ -1,4 +1,4 @@
-import Messages from '@/components/messages';
+import { Messages } from '@/components/Messages';
 
 export default async function MessagesPage() {
   const response = await fetch('http://localhost:8080/messages', {

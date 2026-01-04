@@ -1,6 +1,6 @@
 // import { unstable_noStore } from 'next/cache';
 
-import Messages from '@/components/messages';
+import { Messages } from '@/components/Messages';
 import { getMessages } from '@/lib/messages';
 
 // export const revalidate = 5;

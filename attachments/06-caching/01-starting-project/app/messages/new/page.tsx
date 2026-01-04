@@ -1,9 +1,8 @@
 import { redirect } from 'next/navigation';
-
 import { addMessage } from '@/lib/messages';
 
 export default function NewMessagePage() {
-  async function createMessage(formData) {
+  async function createMessage(formData: FormData) {
     'use server';
 
     const message = formData.get('message');
