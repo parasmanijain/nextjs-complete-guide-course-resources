@@ -1,4 +1,4 @@
-import { Posts } from '@/components/Posts1';
+import { Posts } from '@/components/Posts';
 import { getPosts } from '@/lib/posts';
 import { PostWithMeta } from '@/models';
 
