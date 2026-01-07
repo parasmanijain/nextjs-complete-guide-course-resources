@@ -4,7 +4,7 @@ import { useActionState } from 'react';
 
 import { signup } from '@/actions/auth-actions';
 
-export const AuthForm({ mode }) {
+export const AuthForm = ({ mode }) => {
   const [formState, formAction] = useActionState(signup, {});
   return (
     <form id="auth-form" action={formAction}>
