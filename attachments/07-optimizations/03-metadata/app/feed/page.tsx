@@ -1,10 +1,6 @@
 import { Posts } from '@/components/Posts';
 import { getPosts } from '@/lib/posts';
-
-// export const metadata = {
-//   title: 'Browse all our X posts.',
-//   description: 'Browse all our posts.'
-// }
+import { PostWithMeta } from '@/models';
 
 export async function generateMetadata() {
   const posts = await getPosts() as PostWithMeta[];

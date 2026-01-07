@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
-
 import { Posts } from '@/components/Posts';
 import { getPosts } from '@/lib/posts';
+import { PostWithMeta } from '@/models';
 
 export const metadata = {
   title: 'Latest Posts',

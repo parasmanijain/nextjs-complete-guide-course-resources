@@ -3,8 +3,22 @@
 import { useActionState } from 'react';
 import { FormSubmit } from '@/components/FormSubmit';
 
-export const PostForm = ({ action }) => {
-  const [state, formAction] = useActionState(action, {});
+interface ActionState {
+  errors?: string[];
+}
+
+interface PostFormProps {
+  action: (
+    prevState: ActionState,
+    formData: FormData
+  ) => Promise<ActionState> | ActionState;
+}
+
+export const PostForm = ({ action }: PostFormProps) => {
+  const [state, formAction] = useActionState<ActionState, FormData>(
+    action,
+    {}
+  );
 
   return (
     <>
@@ -30,7 +44,7 @@ export const PostForm = ({ action }) => {
         <p className="form-actions">
           <FormSubmit />
         </p>
-        {state.errors && (
+        {state.errors && state.errors.length > 0 && (
           <ul className="form-errors">
             {state.errors.map((error) => (
               <li key={error}>{error}</li>

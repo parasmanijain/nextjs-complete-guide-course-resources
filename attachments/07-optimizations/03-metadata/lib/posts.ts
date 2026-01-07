@@ -1,53 +1,56 @@
-import sql from 'better-sqlite3';
+import sql, { RunResult } from 'better-sqlite3';
+import { CreatePostInput } from '@/models';
 
 const db = new sql('posts.db');
 
-function initDb() {
+function initDb(): void {
   db.exec(`
     CREATE TABLE IF NOT EXISTS users (
-      id INTEGER PRIMARY KEY, 
-      first_name TEXT, 
+      id INTEGER PRIMARY KEY,
+      first_name TEXT,
       last_name TEXT,
       email TEXT
-    )`);
+    )
+  `);
   db.exec(`
     CREATE TABLE IF NOT EXISTS posts (
-      id INTEGER PRIMARY KEY, 
+      id INTEGER PRIMARY KEY,
       image_url TEXT NOT NULL,
-      title TEXT NOT NULL, 
-      content TEXT NOT NULL, 
+      title TEXT NOT NULL,
+      content TEXT NOT NULL,
       created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-      user_id INTEGER, 
+      user_id INTEGER,
       FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-    )`);
+    )
+  `);
   db.exec(`
     CREATE TABLE IF NOT EXISTS likes (
-      user_id INTEGER, 
-      post_id INTEGER, 
+      user_id INTEGER,
+      post_id INTEGER,
       PRIMARY KEY(user_id, post_id),
-      FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE, 
+      FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
       FOREIGN KEY(post_id) REFERENCES posts(id) ON DELETE CASCADE
-    )`);
-
-  // Creating two dummy users if they don't exist already
+    )
+  `);
   const stmt = db.prepare('SELECT COUNT(*) AS count FROM users');
+  const row = stmt.get() as { count: number } | undefined;
 
-  if (stmt.get().count === 0) {
+  if (!row || row.count === 0) {
     db.exec(`
-    INSERT INTO users (first_name, last_name, email)
-    VALUES ('John', 'Doe', 'john@example.com')
-  `);
+      INSERT INTO users (first_name, last_name, email)
+      VALUES ('John', 'Doe', 'john@example.com')
+    `);
 
     db.exec(`
-    INSERT INTO users (first_name, last_name, email)
-    VALUES ('Max', 'Schwarz', 'max@example.com')
-  `);
+      INSERT INTO users (first_name, last_name, email)
+      VALUES ('Max', 'Schwarz', 'max@example.com')
+    `);
   }
 }
 
 initDb();
 
-export async function getPosts(maxNumber) {
+export async function getPosts(maxNumber?: number) {
   let limitClause = '';
 
   if (maxNumber) {
@@ -67,7 +70,7 @@ export async function getPosts(maxNumber) {
   return maxNumber ? stmt.all(maxNumber) : stmt.all();
 }
 
-export async function storePost(post) {
+export async function storePost(post: CreatePostInput) {
   const stmt = db.prepare(`
     INSERT INTO posts (image_url, title, content, user_id)
     VALUES (?, ?, ?, ?)`);
@@ -75,25 +78,31 @@ export async function storePost(post) {
   return stmt.run(post.imageUrl, post.title, post.content, post.userId);
 }
 
-export async function updatePostLikeStatus(postId, userId) {
-  const stmt = db.prepare(`
+export async function updatePostLikeStatus(
+  postId: number,
+  userId: number
+): Promise<RunResult> {
+  const checkStmt = db.prepare(`
     SELECT COUNT(*) AS count
     FROM likes
-    WHERE user_id = ? AND post_id = ?`);
+    WHERE user_id = ? AND post_id = ?
+  `);
+  const row = checkStmt.get([userId, postId]) as { count: number } | undefined;
 
-  const isLiked = stmt.get(userId, postId).count === 0;
+  const isLiked = !row || row.count === 0;
 
   if (isLiked) {
-    const stmt = db.prepare(`
+    const insertStmt = db.prepare(`
       INSERT INTO likes (user_id, post_id)
-      VALUES (?, ?)`);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    return stmt.run(userId, postId);
-  } else {
-    const stmt = db.prepare(`
-      DELETE FROM likes
-      WHERE user_id = ? AND post_id = ?`);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    return stmt.run(userId, postId);
+      VALUES (?, ?)
+    `);
+    await new Promise<void>((resolve) => setTimeout(resolve, 1000));
+    return insertStmt.run([userId, postId]);
   }
+  const deleteStmt = db.prepare(`
+    DELETE FROM likes
+    WHERE user_id = ? AND post_id = ?
+  `);
+  await new Promise<void>((resolve) => setTimeout(resolve, 1000));
+  return deleteStmt.run([userId, postId]);
 }

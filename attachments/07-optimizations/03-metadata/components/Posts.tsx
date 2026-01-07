@@ -1,23 +1,32 @@
 'use client';
 
 import { useOptimistic } from 'react';
-import Image from 'next/image';
-
+import Image, { ImageLoaderProps } from 'next/image';
 import { formatDate } from '@/lib/format';
 import { LikeButton } from './LikeButton';
 import { togglePostLikeStatus } from '@/actions/posts';
+import { PostWithMeta } from '@/models';
 
-function imageLoader(config) {
+interface PostProps {
+  post: PostWithMeta;
+  action: (a: number) => Promise<void>;
+}
+
+interface PostsProps {
+  posts: PostWithMeta[];
+}
+
+function imageLoader(config: ImageLoaderProps) {
   const urlStart = config.src.split('upload/')[0];
   const urlEnd = config.src.split('upload/')[1];
   const transformations = `w_200,q_${config.quality}`;
   return `${urlStart}upload/${transformations}/${urlEnd}`;
 }
 
-function Post({ post, action }) {
+function Post({ post, action }: PostProps) {
   return (
-    <article className="post">
-      <div className="post-image">
+    <article className='post'>
+      <div className='post-image'>
         <Image
           loader={imageLoader}
           src={post.image}
@@ -27,7 +36,7 @@ function Post({ post, action }) {
           quality={50}
         />
       </div>
-      <div className="post-content">
+      <div className='post-content'>
         <header>
           <div>
             <h2>{post.title}</h2>
@@ -53,7 +62,7 @@ function Post({ post, action }) {
   );
 }
 
-export const Posts = ({ posts }) => {
+export const Posts = ({ posts }: PostsProps) => {
   const [optimisticPosts, updateOptimisticPosts] = useOptimistic(
     posts,
     (prevPosts, updatedPostId) => {
@@ -78,13 +87,13 @@ export const Posts = ({ posts }) => {
     return <p>There are no posts yet. Maybe start sharing some?</p>;
   }
 
-  async function updatePost(postId) {
+  async function updatePost(postId: number) {
     updateOptimisticPosts(postId);
     await togglePostLikeStatus(postId);
   }
 
   return (
-    <ul className="posts">
+    <ul className='posts'>
       {optimisticPosts.map((post) => (
         <li key={post.id}>
           <Post post={post} action={updatePost} />
@@ -92,4 +101,4 @@ export const Posts = ({ posts }) => {
       ))}
     </ul>
   );
-}
+};
