@@ -1,4 +1,5 @@
-import { Header } from '@/components/Header';
+import { ReactNode } from 'react';
+import { Header } from '@/components/Header1';
 import './globals.scss';
 
 export const metadata = {
