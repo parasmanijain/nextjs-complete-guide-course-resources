@@ -4,6 +4,7 @@
 const nextConfig: import('next').NextConfig = {
   images: {
     remotePatterns: [{ hostname: 'res.cloudinary.com' }],
+    qualities: [50, 75],
   },
 };
 

@@ -33,6 +33,7 @@ function Post({ post, action }: PostProps) {
           fill
           alt={post.title}
           quality={50}
+          sizes="128px"
         />
       </div>
       <div className='post-content'>
