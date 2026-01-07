@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { getPosts } from '@/lib/posts';
 import { PostWithMeta } from '@/models';
-import { Posts } from '@/components/Posts1';
+import { Posts } from '@/components/Posts';
 
 async function LatestPosts() {
   const latestPosts = await getPosts(2) as PostWithMeta[];
