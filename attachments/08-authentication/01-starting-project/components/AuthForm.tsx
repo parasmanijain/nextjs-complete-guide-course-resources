@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const AuthForm() {
+export const AuthForm = () => {
   return (
     <form id="auth-form">
       <div>

@@ -1,10 +1,9 @@
 'use client';
 import Link from 'next/link';
 import { useActionState } from 'react';
-
 import { signup } from '@/actions/auth-actions';
 
-export const AuthForm() {
+export const AuthForm = () => {
   const [formState, formAction] = useActionState(signup, {});
   return (
     <form id="auth-form" action={formAction}>

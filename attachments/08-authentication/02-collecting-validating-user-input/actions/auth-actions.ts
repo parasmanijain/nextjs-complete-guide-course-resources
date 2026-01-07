@@ -1,8 +1,8 @@
 'use server';
 
-export async function signup(prevState, formData) {
-  const email = formData.get('email');
-  const password = formData.get('password');
+export async function signup(_: any, formData: FormData) {
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
 
   let errors = {};
 
