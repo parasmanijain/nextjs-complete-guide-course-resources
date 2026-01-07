@@ -14,7 +14,7 @@ function initDb() {
 
 initDb();
 
-export function addMessage(message) {
+export function addMessage(message: string) {
   db.prepare('INSERT INTO messages (text) VALUES (?)').run(message);
 }
 

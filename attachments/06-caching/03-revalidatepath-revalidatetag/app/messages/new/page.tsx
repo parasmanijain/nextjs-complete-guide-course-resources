@@ -6,7 +6,7 @@ export default function NewMessagePage() {
   async function createMessage(formData: FormData) {
     'use server';
 
-    const message = formData.get('message');
+    const message = formData.get('message') as string;
     // addMessage(message);
     revalidateTag('msg');
     redirect('/messages');
