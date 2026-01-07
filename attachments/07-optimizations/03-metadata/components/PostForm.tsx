@@ -1,7 +1,6 @@
 'use client';
 
 import { useActionState } from 'react';
-
 import { FormSubmit } from '@/components/FormSubmit';
 
 export const PostForm = ({ action }) => {
