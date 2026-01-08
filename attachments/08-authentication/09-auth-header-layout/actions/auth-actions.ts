@@ -1,15 +1,38 @@
 'use server';
-import { redirect } from 'next/navigation';
 
+import { redirect } from 'next/navigation';
 import { hashUserPassword, verifyPassword } from '@/lib/hash';
 import { createUser, getUserByEmail } from '@/lib/user';
 import { createAuthSession } from '@/lib/auth';
+import { AuthMode } from '@/models';
 
-export async function signup(prevState, formData) {
-  const email = formData.get('email');
-  const password = formData.get('password');
+export interface SignupErrors {
+  email?: string;
+  password?: string;
+}
 
-  let errors = {};
+export interface SignupFormState {
+  errors?: SignupErrors;
+}
+
+/**
+ * SQLite error shape for constraint violations
+ */
+interface SqliteError extends Error {
+  code?: string;
+}
+
+/**
+ * Signup Server Action
+ */
+export async function signup(
+  _: SignupFormState,
+  formData: FormData
+): Promise<SignupFormState> {
+  const email = formData.get('email')?.toString() ?? '';
+  const password = formData.get('password')?.toString() ?? '';
+
+  const errors: SignupErrors = {};
 
   if (!email.includes('@')) {
     errors.email = 'Please enter a valid email address.';
@@ -20,17 +43,18 @@ export async function signup(prevState, formData) {
   }
 
   if (Object.keys(errors).length > 0) {
-    return {
-      errors,
-    };
+    return { errors };
   }
 
   const hashedPassword = hashUserPassword(password);
+
   try {
     const id = createUser(email, hashedPassword);
-    await createAuthSession(id);
+    await createAuthSession(String(id));
     redirect('/training');
-  } catch (error) {
+  } catch (err: unknown) {
+    const error = err as SqliteError;
+
     if (error.code === 'SQLITE_CONSTRAINT_UNIQUE') {
       return {
         errors: {
@@ -39,13 +63,20 @@ export async function signup(prevState, formData) {
         },
       };
     }
+
     throw error;
   }
 }
 
-export async function login(prevState, formData) {
-  const email = formData.get('email');
-  const password = formData.get('password');
+/**
+ * Login Server Action
+ */
+export async function login(
+  _: SignupFormState,
+  formData: FormData
+): Promise<SignupFormState> {
+  const email = formData.get('email')?.toString() ?? '';
+  const password = formData.get('password')?.toString() ?? '';
 
   const existingUser = getUserByEmail(email);
 
@@ -67,13 +98,21 @@ export async function login(prevState, formData) {
     };
   }
 
-  await createAuthSession(existingUser.id);
+  await createAuthSession(String(existingUser.id));
   redirect('/training');
 }
 
-export async function auth(mode, prevState, formData) {
+/**
+ * Unified Auth Action (login/signup)
+ */
+export async function auth(
+  mode: AuthMode,
+  prevState: SignupFormState,
+  formData: FormData
+): Promise<SignupFormState> {
   if (mode === 'login') {
     return login(prevState, formData);
   }
+
   return signup(prevState, formData);
 }
