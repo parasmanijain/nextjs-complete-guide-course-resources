@@ -1,10 +1,22 @@
 'use server';
 
-export async function signup(_: any, formData: FormData) {
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
+export interface SignupErrors {
+  email?: string;
+  password?: string;
+}
 
-  let errors = {};
+export interface SignupFormState {
+  errors?: SignupErrors;
+}
+
+export async function signup(
+  _: SignupFormState,
+  formData: FormData
+): Promise<SignupFormState> {
+  const email = formData.get('email')?.toString() ?? '';
+  const password = formData.get('password')?.toString() ?? '';
+
+  const errors: SignupErrors = {};
 
   if (!email.includes('@')) {
     errors.email = 'Please enter a valid email address.';
@@ -15,10 +27,10 @@ export async function signup(_: any, formData: FormData) {
   }
 
   if (Object.keys(errors).length > 0) {
-    return {
-      errors,
-    };
+    return { errors };
   }
 
-  // store it in the database (create a new user)
+  // TODO: Store user in database
+
+  return {};
 }
