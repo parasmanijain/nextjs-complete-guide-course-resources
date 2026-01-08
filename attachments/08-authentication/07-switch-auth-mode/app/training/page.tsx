@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation';
-
 import { verifyAuth } from '@/lib/auth';
 import { getTrainings } from '@/lib/training';
 

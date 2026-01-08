@@ -1,11 +1,20 @@
 'use client';
+
 import Link from 'next/link';
 import { useActionState } from 'react';
+import { signup, SignupFormState } from '@/actions/auth-actions';
+import { AuthMode } from '@/models';
 
-import { signup } from '@/actions/auth-actions';
+interface AuthFormProps {
+  mode: AuthMode;
+}
 
-export const AuthForm = ({ mode }) => {
-  const [formState, formAction] = useActionState(signup, {});
+export const AuthForm = ({ mode }: AuthFormProps) => {
+  const [formState, formAction] = useActionState<SignupFormState, FormData>(
+    signup,
+    {}
+  );
+
   return (
     <form id="auth-form" action={formAction}>
       <div>
@@ -21,8 +30,8 @@ export const AuthForm = ({ mode }) => {
       </p>
       {formState.errors && (
         <ul id="form-errors">
-          {Object.keys(formState.errors).map((error) => (
-            <li key={error}>{formState.errors[error]}</li>
+          {Object.entries(formState.errors).map(([key, message]) => (
+            <li key={key}>{message}</li>
           ))}
         </ul>
       )}
@@ -41,4 +50,4 @@ export const AuthForm = ({ mode }) => {
       </p>
     </form>
   );
-}
+};
