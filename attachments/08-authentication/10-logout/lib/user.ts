@@ -1,3 +1,4 @@
+import { User } from '@/models';
 import db from './db';
 
 export function createUser(email: string, password: string) {
@@ -7,6 +8,13 @@ export function createUser(email: string, password: string) {
   return result.lastInsertRowid;
 }
 
-export function getUserByEmail(email) {
-  return db.prepare('SELECT * FROM users WHERE email = ?').get(email);
+/**
+ * Fetch user by email
+ */
+export function getUserByEmail(email: string): User | null {
+  const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email) as
+    | User
+    | undefined;
+
+  return user ?? null;
 }

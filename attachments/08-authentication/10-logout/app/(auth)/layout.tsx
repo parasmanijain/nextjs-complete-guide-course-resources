@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { logout } from '@/actions/auth-actions';
 import '../globals.scss';
 
