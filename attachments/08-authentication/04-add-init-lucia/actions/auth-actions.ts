@@ -1,14 +1,32 @@
 'use server';
-import { redirect } from 'next/navigation';
 
+import { redirect } from 'next/navigation';
 import { hashUserPassword } from '@/lib/hash';
 import { createUser } from '@/lib/user';
 
-export async function signup(prevState, formData) {
-  const email = formData.get('email');
-  const password = formData.get('password');
+export interface SignupErrors {
+  email?: string;
+  password?: string;
+}
 
-  let errors = {};
+export interface SignupFormState {
+  errors?: SignupErrors;
+}
+
+/**
+ * SQLite error shape for constraint violations
+ */
+interface SqliteError extends Error {
+  code?: string;
+}
+
+export async function signup(
+  _: SignupFormState,
+  formData: FormData
+): Promise<SignupFormState> {
+  const email = formData.get('email')?.toString() ?? '';
+  const password = formData.get('password')?.toString() ?? '';
+  const errors: SignupErrors = {};
 
   if (!email.includes('@')) {
     errors.email = 'Please enter a valid email address.';
@@ -19,20 +37,20 @@ export async function signup(prevState, formData) {
   }
 
   if (Object.keys(errors).length > 0) {
-    return {
-      errors,
-    };
+    return { errors };
   }
 
   const hashedPassword = hashUserPassword(password);
   try {
     createUser(email, hashedPassword);
-  } catch (error) {
+  } catch (err: unknown) {
+    const error = err as SqliteError;
     if (error.code === 'SQLITE_CONSTRAINT_UNIQUE') {
       return {
         errors: {
-          email: 'It seems like an account for the chosen email already exists.'
-        }
+          email:
+            'It seems like an account for the chosen email already exists.',
+        },
       };
     }
     throw error;
