@@ -1,8 +1,4 @@
 onlyBuiltDependencies:
   - '@parcel/watcher'
-  - better-sqlite3
   - sharp
   - unrs-resolver
-
-packages:
-  - 'backend'
